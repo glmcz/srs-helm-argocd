@@ -11,7 +11,7 @@
 
 image:
   repository: ossrs/srs
-  tag: ""
+  tag: "v5.0-r3"
   pullPolicy: IfNotPresent
 
 replicaCount: 1
