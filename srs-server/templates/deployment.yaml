@@ -63,7 +63,7 @@ spec:
             - name: SRS_RTC_SERVER_LISTEN
               value: "8000"
             - name: SRS_RTC_SERVER_USE_AUTO_DETECT_NETWORK_IP
-              value: "off"
+              value: "on"
             - name: SRS_PLATFORM
               value: "helm"
             # Overwrite the config by conf.
