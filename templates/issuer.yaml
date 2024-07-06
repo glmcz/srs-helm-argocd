@@ -3,16 +3,4 @@ kind: Issuer
 metadata:
   name: {{ include "srs-ossr.issuerName" . }}
 spec:
-  acme:
-    # The ACME server URL
-    server: {{ .Values.issuer.server }}
-    # Email address used for ACME registration
-    email: {{ .Values.issuer.email }}
-    # Name of a secret used to store the ACME account private key
-    privateKeySecretRef:
-      name: {{ include "srs-ossr.issuerPrivateKeySecretName" . }}
-    # Enable the HTTP-01 challenge provider
-    solvers:
-      - http01:
-          ingress:
-            ingressClassName: {{ .Values.issuer.className }}
+  selfSigned: {}
