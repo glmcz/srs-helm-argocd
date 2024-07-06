@@ -38,16 +38,12 @@ service:
     rtc:
       port: 8000
 
-issuer:
-  className: nginx
-  email: info@echig.dev
-  server: https://acme-v02.api.letsencrypt.org/directory
 
 ingress:
   host: api
   serviceName: srs
 
-  path: /(/|$)(.*)
+  path: /srs/
   servicePort: 8080
 
   pathAPI: /(/|$)(.*)
