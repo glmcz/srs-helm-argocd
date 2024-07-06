@@ -43,7 +43,7 @@ ingress:
   host: api
   serviceName: srs
 
-  path: /srs/
+  path: /(/|$)(.*)
   servicePort: 8080
 
   pathAPI: /(/|$)(.*)
