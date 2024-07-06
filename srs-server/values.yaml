@@ -94,6 +94,9 @@ ingress:
   #need to be public
   pathRTc: /(/|$)(.*)
   rtcPort: 8000
+  
+  hosts: "*"
+  
   tls: []
   secretName:
     name: secretName
