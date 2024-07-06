@@ -46,10 +46,10 @@ ingress:
   path: /srs(/|$)(.*)
   servicePort: 8080
 
-  pathAPI: (/|$)(.*)
+  pathAPI: /srs(/|$)(.*)
   apiPort: 1985
 
-  pathRTc: (/|$)(.*)
+  pathRTc: /srs(/|$)(.*)
   rtcPort: 8000
 
   annotations:
