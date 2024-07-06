@@ -44,8 +44,8 @@ issuer:
   server: https://acme-v02.api.letsencrypt.org/directory
 
 ingress:
-  host: api.super-genius.org
-  serviceName: webrtc-srs-srs-ossr
+  host: api
+  serviceName: srs
 
   path: /srs(/|$)(.*)
   servicePort: 8080
