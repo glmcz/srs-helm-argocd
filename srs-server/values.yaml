@@ -94,8 +94,8 @@ ingress:
   #need to be public
   pathRTc: /(/|$)(.*)
   rtcPort: 8000
-  
-  hosts: "*"
+
+  hosts: "argocd-server.local"
   
   tls: []
   secretName:
