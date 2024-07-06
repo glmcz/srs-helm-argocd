@@ -14,8 +14,6 @@ spec:
       labels:
         {{- include "srs-ossr.selectorLabels" . | nindent 8 }}
     spec:
-      nodeSelector:
-        cloud.google.com/gke-nodepool: {{ .Values.nodepoolName }}     
       serviceAccountName: {{ include "srs-ossr.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}

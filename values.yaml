@@ -1,7 +1,5 @@
 replicas: 1
 
-nodepoolName: "pool-apps"
-
 image:
   name: ossrs/srs
   tag: v5.0-r3
