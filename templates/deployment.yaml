@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "srs-ossr.fullname" . }}
+  labels:
+    {{ include "srs-ossr.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "srs-ossr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "srs-ossr.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: {{ .Values.nodepoolName }}     
+      serviceAccountName: {{ include "srs-ossr.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            requests:
+              cpu: 50m
+              memory: 72Mi
+            limits:
+              cpu: 90m
+              memory: 2Gi
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: SRS_RTC_SERVER_CANDIDATE
+              value: {{ .Values.candidate | quote }}
+          ports:
+            - containerPort: 1935
+            - containerPort: 1985
+            - containerPort: 8080
+            - containerPort: 8000
+          volumeMounts:
+            - name: conf
+              mountPath: /usr/local/srs/conf
+            - name: drv
+              mountPath: /usr/local/srs/objs/drv
+      volumes:
+        - name: conf
+          configMap:
+            name: {{ include "srs-ossr.configMapName" . }}
+            items:
+              - key: docker.conf
+                path: docker.conf
+        - name: drv
+          hostPath:
+            path: /tmp/data
+            type: DirectoryOrCreate

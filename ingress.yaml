@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "srs-ossr.ingressName" . }}
+  annotations:
+    cert-manager.io/issuer: {{ include "srs-ossr.issuerName" . }}
+    nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.ingress.annotations.nginxRewriteTarget }}
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: {{ include "srs-ossr.ingressSecretName" . }}
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: {{ .Values.ingress.path }}
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ .Values.ingress.serviceName }}
+            port:
+              number: {{ .Values.ingress.servicePort }}
+      - path: {{ .Values.ingress.pathAPI }}
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ .Values.ingress.serviceName }}
+            port:
+              number: {{ .Values.ingress.apiPort }}
+      - path: {{ .Values.ingress.pathRTc }}
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ .Values.ingress.serviceName }}
+            port:
+              number: {{ .Values.ingress.rtcPort }}
+          
+

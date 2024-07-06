@@ -1,0 +1,62 @@
+replicas: 1
+
+nodepoolName: "pool-apps"
+
+image:
+  name: ossrs/srs
+  tag: v5.0-r3
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+configMap:
+  # Specifies whether a configmap should be created
+  create: true
+  name: "configmap"
+
+externalSecrets:
+  # Specifies whether an external secrets shall be created
+  create: true
+  name: "external-secrets"
+
+candidate: "192.168.58.2"
+
+service:
+  type: ClusterIP
+  ports:
+    http:
+      port: 8080
+    api:
+      port: 1985
+    rtmp:
+      port: 1935
+    rtc:
+      port: 8000
+
+issuer:
+  className: nginx
+  email: info@echig.dev
+  server: https://acme-v02.api.letsencrypt.org/directory
+
+ingress:
+  host: api.super-genius.org
+  serviceName: webrtc-srs-srs-ossr
+
+  path: /srs(/|$)(.*)
+  servicePort: 8080
+
+  pathAPI: /srsrtc(/|$)(.*)
+  apiPort: 1985
+
+  pathRTc: /srs(/|$)(.*)
+  rtcPort: 8000
+
+  annotations:
+    nginxRewriteTarget: /$2

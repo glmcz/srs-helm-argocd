@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "srs-ossr.fullname" . }}
+  labels: 
+    {{ include "srs-ossr.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type}}
+  ports:
+  - port: {{ .Values.service.ports.http.port }}
+    targetPort: 8080
+    protocol: TCP
+    nodePort: {{ .Values.service.ports.http.nodePort }}
+    name: http
+  - port: {{ .Values.service.ports.api.port }}
+    targetPort: 1985
+    protocol: TCP
+    nodePort: {{ .Values.service.ports.api.nodePort }}
+    name: http-api
+  - port: {{ .Values.service.ports.rtmp.port }}
+    targetPort: 1935
+    protocol: TCP
+    nodePort: {{ .Values.service.ports.rtmp.nodePort }}
+    name: rtmp
+  - port: {{ .Values.service.ports.rtc.port }}
+    targetPort: 8000
+    protocol: UDP
+    nodePort: {{ .Values.service.ports.rtc.nodePort }}
+    name: rtc
+
+  selector:
+    {{ include "srs-ossr.selectorLabels" . | nindent 4 }}
