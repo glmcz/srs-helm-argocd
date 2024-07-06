@@ -95,7 +95,7 @@ ingress:
   pathRTc: /(/|$)(.*)
   rtcPort: 8000
 
-  hosts: "srs"
+  host: "srs"
   
   secretName:
     name: secretName
