@@ -7,9 +7,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.ingress.annotations.nginxRewriteTarget }}
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: {{ .Values.ingress.className }}
+  ingressClassName: nginx
   tls:
-  - hosts: {{ .Values.ingress.host }}
+  - hosts:
+    - {{ .Values.ingress.host }}
     secretName: {{ include "srs.ingressSecretName" . }}
   rules:
   - host: {{ .Values.ingress.host }}
@@ -19,21 +20,21 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ include "srs.fullname" .}}
+            name: {{ .Values.ingress.serviceName }}
             port:
               number: {{ .Values.ingress.servicePort }}
       - path: {{ .Values.ingress.pathAPI }}
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ include "srs.fullname" .}}
+            name: {{ .Values.ingress.serviceName }}
             port:
               number: {{ .Values.ingress.apiPort }}
       - path: {{ .Values.ingress.pathRTc }}
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ include "srs.fullname" . }}
+            name: {{ .Values.ingress.serviceName }}
             port:
               number: {{ .Values.ingress.rtcPort }}
           
