@@ -81,7 +81,7 @@ service:
 
 ingress:
   enabled: false
-  serviceName: "nginx"
+  className: "nginx"
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
@@ -95,7 +95,7 @@ ingress:
   pathRTc: /(/|$)(.*)
   rtcPort: 8000
 
-  host: "argocd-server.local"
+  hosts: "srs"
   
   secretName:
     name: secretName
