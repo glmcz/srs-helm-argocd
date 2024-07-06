@@ -97,7 +97,6 @@ ingress:
 
   hosts: "argocd-server.local"
   
-  tls: []
   secretName:
     name: secretName
     hosts:
