@@ -20,21 +20,21 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ include "srs.fullname"}}
+            name: {{ include "srs.fullname" .}}
             port:
               number: {{ .Values.ingress.servicePort }}
       - path: {{ .Values.ingress.pathAPI }}
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ include "srs.fullname"}}
+            name: {{ include "srs.fullname" .}}
             port:
               number: {{ .Values.ingress.apiPort }}
       - path: {{ .Values.ingress.pathRTc }}
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ include "srs.fullname"}}
+            name: {{ include "srs.fullname" . }}
             port:
               number: {{ .Values.ingress.rtcPort }}
           
