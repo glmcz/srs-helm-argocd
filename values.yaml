@@ -27,7 +27,7 @@ externalSecrets:
 candidate: "192.168.58.2"
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     http:
       port: 8080
@@ -37,7 +37,6 @@ service:
       port: 1935
     rtc:
       port: 8000
-
 
 ingress:
   host: api
