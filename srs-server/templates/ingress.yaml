@@ -9,8 +9,7 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
-  - hosts:
-    - {{ .Values.ingress.host }}
+  - hosts: {{ .Values.ingress.host }}
     secretName: {{ include "srs.ingressSecretName" . }}
   rules:
   - host: {{ .Values.ingress.host }}
