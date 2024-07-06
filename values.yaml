@@ -49,7 +49,7 @@ ingress:
   pathAPI: /srs(/|$)(.*)
   apiPort: 1985
 
-  pathRTc: /srs(/|$)(.*)
+  pathRTc: /srsrtc(/|$)(.*)
   rtcPort: 8000
 
   annotations:
