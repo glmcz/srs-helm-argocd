@@ -60,3 +60,25 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+{{/*
+Create the name of the Ingress Name
+*/}}
+{{- define "srs.ingressName" -}}
+{{- printf "%s-ingress" (include "srs.fullname" .) -}}
+{{- end -}}
+
+{{/*
+Create the name of the Ingress Secret Name
+*/}}
+{{- define "srs.ingressSecretName" -}}
+{{- printf "%s-ingress-secret" (include "srs.fullname" .) -}}
+{{- end -}}
+
+{{/*
+Create the name of the Issuer Name
+*/}}
+{{- define "srs.issuerName" -}}
+{{- printf "%s-issuer" (include "srs.fullname" .) -}}
+{{- end -}}
